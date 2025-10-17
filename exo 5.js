@@ -1,25 +1,20 @@
 function filterProducts(products, minPrice, maxPrice, sortBy = "name") {
-  // Validation et normalisation des bornes
   let min = Number(minPrice);
   let max = Number(maxPrice);
   if (Number.isNaN(min) || Number.isNaN(max)) {
     throw new TypeError("minPrice et maxPrice doivent être des nombres");
   }
   if (min > max) {
-    // on échange les bornes si l'utilisateur s'est trompé
     [min, max] = [max, min];
   }
 
-  // Filtrer : prix compris entre min et max inclus (et s'assurer que price est un nombre)
   const filtered = products.filter(product => {
     const price = Number(product && product.price);
     return !Number.isNaN(price) && price >= min && price <= max;
   });
 
-  // Préparer une copie pour ne pas modifier les entrées
-  const toSort = filtered.slice(); // copie superficielle
+  const toSort = filtered.slice();
 
-  // Choisir le comparateur selon sortBy
   const comparators = {
     name: (a, b) => {
       const nameA = String(a.name || "");
@@ -31,7 +26,6 @@ function filterProducts(products, minPrice, maxPrice, sortBy = "name") {
 
   const comparator = comparators[sortBy] || comparators.name;
 
-  // Trier la copie avec le comparateur choisi
   toSort.sort(comparator);
 
   return toSort;

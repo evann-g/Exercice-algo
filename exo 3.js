@@ -22,7 +22,6 @@ function analyserAchats(achats, seuilPrix) {
   console.log("Catégorie la plus fréquente :", categorieTop);
 }
 
-// ✅ Appel correct
 analyserAchats([
   { p: 50, c: "tech" },
   { p: 120, c: "clothes" },
